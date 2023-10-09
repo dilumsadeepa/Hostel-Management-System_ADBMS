@@ -1,8 +1,8 @@
 # Hostel-Management-System_ADBMS
 Advanced database management system_mini project
 
-<b>Functionalities:</b>
-Asset management
-Complain management
-Maintenance management
+<b>Functionalities:</b><br>
+Asset management<br>
+Complain management<br>
+Maintenance management<br>
 Report Management
