@@ -1,0 +1,1 @@
+ssh -i "hms.pem" ubuntu@ec2-15-206-148-128.ap-south-1.compute.amazonaws.com
