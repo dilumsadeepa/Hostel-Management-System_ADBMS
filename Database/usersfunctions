@@ -1,0 +1,6 @@
+InsertUserWithEncryptedPassword
+	CALL InsertUserWithEncryptedPassword()
+	
+
+AuthenticateUser
+	CALL AuthenticateUser();
