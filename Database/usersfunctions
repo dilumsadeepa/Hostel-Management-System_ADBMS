@@ -1,0 +1,12 @@
+InsertUserWithEncryptedPassword
+	CALL InsertUserWithEncryptedPassword()
+	
+
+AuthenticateUser
+	CALL AuthenticateUser();
+
+Insert room assets
+	CALL InsertRoomAssets();
+	
+view all room assets
+	SELECT * FROM RoomAssetsView;
