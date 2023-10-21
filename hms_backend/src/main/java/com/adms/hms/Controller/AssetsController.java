@@ -15,15 +15,16 @@ import java.util.List;
 public class AssetsController {
     private final AssetService assetService;
 
-
     public AssetsController(AssetService assetService) {
         this.assetService = assetService;
     }
-
 
     @GetMapping("/all")
     public ResponseEntity<List<AssetsEntity>> getAllEmloyee (){
         List<AssetsEntity> assets = assetService.findallAssets();
         return  new ResponseEntity<>(assets, HttpStatus.OK);
     }
+
+    
+
 }
