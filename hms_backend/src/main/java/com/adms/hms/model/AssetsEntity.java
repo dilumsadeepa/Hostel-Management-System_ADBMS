@@ -2,6 +2,8 @@ package com.adms.hms.model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "assets", schema = "hms", catalog = "")
 public class AssetsEntity {

@@ -4,9 +4,7 @@ import com.adms.hms.Service.AssetService;
 import com.adms.hms.model.AssetsEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,11 +18,17 @@ public class AssetsController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<AssetsEntity>> getAllEmloyee (){
+    public ResponseEntity<List<AssetsEntity>> getAllAssets (){
         List<AssetsEntity> assets = assetService.findallAssets();
         return  new ResponseEntity<>(assets, HttpStatus.OK);
     }
 
-    
+    @PostMapping("/add")
+    public ResponseEntity<AssetsEntity> addAssets(@RequestBody AssetsEntity assetsEntity){
+        AssetsEntity newAsset = assetService.addasset(assetsEntity);
+        return new ResponseEntity<>(newAsset,HttpStatus.CREATED);
+    }
+
+
 
 }

@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+
+import static java.util.UUID.randomUUID;
 
 @Service
 public class AssetService {
@@ -20,5 +24,9 @@ public class AssetService {
         return assetRepo.findAll();
     }
 
+
+    public AssetsEntity addasset(AssetsEntity assetsEntity){
+        return assetRepo.save(assetsEntity);
+    }
 
 }
