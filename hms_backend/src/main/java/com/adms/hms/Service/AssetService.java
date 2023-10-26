@@ -24,6 +24,9 @@ public class AssetService {
         return assetRepo.findAll();
     }
 
+    public void deleteAsset(int id){
+        assetRepo.deleteById(id);
+    }
 
     public AssetsEntity addasset(AssetsEntity assetsEntity){
         return assetRepo.save(assetsEntity);
