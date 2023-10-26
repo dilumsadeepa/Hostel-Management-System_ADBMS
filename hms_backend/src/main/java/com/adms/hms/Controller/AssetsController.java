@@ -30,5 +30,12 @@ public class AssetsController {
     }
 
 
+    @PutMapping("/update")
+    public ResponseEntity<AssetsEntity> updateAssets(@RequestBody AssetsEntity assetsEntity){
+        AssetsEntity updateAsset = assetService.addasset(assetsEntity);
+        return new ResponseEntity<>(updateAsset,HttpStatus.OK);
+    }
+
+
 
 }
