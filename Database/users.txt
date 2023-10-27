@@ -343,6 +343,35 @@ VALUES
     (1, 'Pending', 'Repair', 'repair.jpg', NOW(), 1),
     (2, 'In Progress', 'Maintenance', 'maintenance.jpg', NOW(), 2),
     (3, 'Completed', 'Inspection', 'inspection.jpg', NOW(), 3);
+    
+    
+
+=== complaint_assignments ===
+
+CREATE TABLE complaint_assignments (
+    assignment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    role_id INT NOT NULL,
+    complaint_id INT NOT NULL,
+    assigned_date DATETIME NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES roles(id),
+    FOREIGN KEY (complaint_id) REFERENCES complains(complain_id)
+);
+
+
+
+
+=== trigger to insert data to complain assignments ===
+
+DELIMITER //
+CREATE TRIGGER InsertComplaintAssignment
+AFTER INSERT ON complains
+FOR EACH ROW
+BEGIN
+    INSERT INTO complaint_assignments (role_id, complaint_id, assigned_date)
+    VALUES (5, NEW.complain_id, NOW());
+END;
+//
+DELIMITER ;
 
 
 
