@@ -5,12 +5,36 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@jakarta.persistence.Table(name = "maintaince", schema = "hms", catalog = "")
+@Table(name = "maintaince", schema = "hms", catalog = "")
 public class MaintainceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @jakarta.persistence.Column(name = "maintenance_id", nullable = false)
+    @Column(name = "maintenance_id", nullable = false)
     private int maintenanceId;
+    @Basic
+    @Column(name = "complaint_id", nullable = false)
+    private int complaintId;
+    @Basic
+    @Column(name = "res_id", nullable = false)
+    private int resId;
+    @Basic
+    @Column(name = "handler", nullable = false, length = 255)
+    private String handler;
+    @Basic
+    @Column(name = "status", nullable = false, length = 255)
+    private String status;
+    @Basic
+    @Column(name = "inspection_note", nullable = false, length = -1)
+    private String inspectionNote;
+    @Basic
+    @Column(name = "solution", nullable = false, length = -1)
+    private String solution;
+    @Basic
+    @Column(name = "evidence_image", nullable = true, length = 255)
+    private String evidenceImage;
+    @Basic
+    @Column(name = "date", nullable = false)
+    private Timestamp date;
 
     public int getMaintenanceId() {
         return maintenanceId;
@@ -20,10 +44,6 @@ public class MaintainceEntity {
         this.maintenanceId = maintenanceId;
     }
 
-    @Basic
-    @Column(name = "complaint_id", nullable = false)
-    private int complaintId;
-
     public int getComplaintId() {
         return complaintId;
     }
@@ -31,10 +51,6 @@ public class MaintainceEntity {
     public void setComplaintId(int complaintId) {
         this.complaintId = complaintId;
     }
-
-    @Basic
-    @Column(name = "res_id", nullable = false)
-    private int resId;
 
     public int getResId() {
         return resId;
@@ -44,10 +60,6 @@ public class MaintainceEntity {
         this.resId = resId;
     }
 
-    @Basic
-    @Column(name = "handler", nullable = false, length = 255)
-    private String handler;
-
     public String getHandler() {
         return handler;
     }
@@ -55,10 +67,6 @@ public class MaintainceEntity {
     public void setHandler(String handler) {
         this.handler = handler;
     }
-
-    @Basic
-    @Column(name = "status", nullable = false, length = 255)
-    private String status;
 
     public String getStatus() {
         return status;
@@ -68,10 +76,6 @@ public class MaintainceEntity {
         this.status = status;
     }
 
-    @Basic
-    @Column(name = "inspection_note", nullable = false, length = -1)
-    private String inspectionNote;
-
     public String getInspectionNote() {
         return inspectionNote;
     }
@@ -79,10 +83,6 @@ public class MaintainceEntity {
     public void setInspectionNote(String inspectionNote) {
         this.inspectionNote = inspectionNote;
     }
-
-    @Basic
-    @Column(name = "solution", nullable = false, length = -1)
-    private String solution;
 
     public String getSolution() {
         return solution;
@@ -92,10 +92,6 @@ public class MaintainceEntity {
         this.solution = solution;
     }
 
-    @Basic
-    @Column(name = "evidence_image", nullable = true, length = 255)
-    private String evidenceImage;
-
     public String getEvidenceImage() {
         return evidenceImage;
     }
@@ -103,10 +99,6 @@ public class MaintainceEntity {
     public void setEvidenceImage(String evidenceImage) {
         this.evidenceImage = evidenceImage;
     }
-
-    @Basic
-    @Column(name = "date", nullable = false)
-    private Timestamp date;
 
     public Timestamp getDate() {
         return date;

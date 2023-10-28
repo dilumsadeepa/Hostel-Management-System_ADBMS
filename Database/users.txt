@@ -334,9 +334,8 @@ CREATE TABLE maintaince (
 );
 
 
-ALTER TABLE maintenance
-ADD COLUMN complaint_id INT,
-ADD FOREIGN KEY (complaint_id) REFERENCES complains (complain_id);
+ALTER TABLE maintaince
+ADD FOREIGN KEY (complaint_id) REFERENCES complaint (complaint_id);
 
 
 INSERT INTO maintenance (asset_id, status, type, evidence_image, date, complaint_id)
