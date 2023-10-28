@@ -1,3 +1,7 @@
 ssh -i "hms.pem" ubuntu@ec2-15-206-148-128.ap-south-1.compute.amazonaws.com
 
 mysql -h newhms.cg5qaw4gi36b.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+
+
+
+
