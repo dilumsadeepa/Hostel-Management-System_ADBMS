@@ -41,6 +41,9 @@ public class ComplaintService {
                 .orElseThrow(() -> new ComplaintNotFoundException("Complaint by id " + complaintId + " was not found"));
     }
 
+    public List<ComplaintEntity> getComplaintsByUserIndex(String userIndex) {
+        return complaintRepo.getComplaintsByUserIndex(userIndex);
+    }
 
 
 }

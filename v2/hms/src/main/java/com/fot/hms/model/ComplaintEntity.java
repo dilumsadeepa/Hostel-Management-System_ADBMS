@@ -1,6 +1,6 @@
 package com.fot.hms.model;
 import jakarta.persistence.*;
-import java.time.LocalDateTime; // Import LocalDateTime
+import java.time.LocalDate; // Import LocalDateTime
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
@@ -28,10 +28,9 @@ public class ComplaintEntity implements Serializable {
     @Column(name = "res_id", nullable = false)
     private int resId;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "complaint_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime complaintDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate complaintDate;
 
     @Column(name = "evidence_image")
     private String evidenceImage;
@@ -56,7 +55,7 @@ public class ComplaintEntity implements Serializable {
 
     }
 
-    public ComplaintEntity(int userId, String userIndex, String complaint, int resId, LocalDateTime complaintDate, String evidenceImage, String status, UsersEntity user, UsersEntity userByIndex, ResourceEntity resource) {
+    public ComplaintEntity(int userId, String userIndex, String complaint, int resId, LocalDate complaintDate, String evidenceImage, String status, UsersEntity user, UsersEntity userByIndex, ResourceEntity resource) {
         this.userId = userId;
         this.userIndex = userIndex;
         this.complaint = complaint;
@@ -109,11 +108,11 @@ public class ComplaintEntity implements Serializable {
         this.resId = resId;
     }
 
-    public LocalDateTime getComplaintDate() {
+    public LocalDate getComplaintDate() {
         return complaintDate;
     }
 
-    public void setComplaintDate(LocalDateTime complaintDate) {
+    public void setComplaintDate(LocalDate complaintDate) {
         this.complaintDate = complaintDate;
     }
 

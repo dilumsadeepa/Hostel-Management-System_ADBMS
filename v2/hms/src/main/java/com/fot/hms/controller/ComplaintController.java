@@ -47,4 +47,18 @@ public class ComplaintController {
         complaintService.deleteComplaint(Id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @GetMapping("/complaintByUserId/{userId}")
+    public ResponseEntity<List<ComplaintEntity>> getComplaintsByUserId(@PathVariable("userId") String userId) {
+        List<ComplaintEntity> complaints = complaintService.getComplaintsByUserIndex(userId);
+
+        if (complaints.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(complaints, HttpStatus.OK);
+        }
+    }
+
+
 }
