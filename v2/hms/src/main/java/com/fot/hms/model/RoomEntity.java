@@ -6,8 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-@jakarta.persistence.Table(name = "room", schema = "hms", catalog = "")
-@jakarta.persistence.IdClass(com.fot.hms.model.RoomEntityPK.class)
 public class RoomEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
