@@ -27,6 +27,9 @@ public class UsersEntity {
     @ManyToOne
     @JoinColumn(name = "role", referencedColumnName = "id", nullable = false)
     private RolesEntity rolesByRole;
+    @Basic
+    @Column(name = "role", nullable = false)
+    private int role;
 
     public int getId() {
         return id;
@@ -64,10 +67,6 @@ public class UsersEntity {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 //    public int getRole() {
 //        return role;
 //    }
@@ -75,6 +74,10 @@ public class UsersEntity {
 //    public void setRole(int role) {
 //        this.role = role;
 //    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -110,5 +113,13 @@ public class UsersEntity {
 
     public void setRolesByRole(RolesEntity rolesByRole) {
         this.rolesByRole = rolesByRole;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
