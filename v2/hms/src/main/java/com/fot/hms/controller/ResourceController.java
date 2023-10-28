@@ -35,4 +35,10 @@ public class ResourceController {
         return new ResponseEntity<>(updateres,HttpStatus.OK);
     }
 
+//    @DeleteMapping("/delete/{resId}")
+//    public ResponseEntity<?> deleteAssets(@PathVariable("resId") int resId){
+//        resourceService.deleteresource(resId);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
 }

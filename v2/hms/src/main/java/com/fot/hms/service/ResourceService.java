@@ -21,8 +21,8 @@ public class ResourceService {
         return resourceRepo.findAll();
     }
 
-    public void deleteAsset(int id){
-        resourceRepo.deleteById(id);
+    public void deleteresource(int resId){
+        resourceRepo.deleteById(resId);
     }
 
     public ResourceEntity addresource(ResourceEntity resourceEntity){
