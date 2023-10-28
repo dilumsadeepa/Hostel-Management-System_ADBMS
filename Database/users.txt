@@ -5,6 +5,7 @@ create table roles (
 
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
+  index_no VARCHAR(255) NOT NULL UNIQUE,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   mobile_no VARCHAR(255) NOT NULL,
@@ -31,8 +32,7 @@ DELIMITER //
 
 CREATE PROCEDURE InsertUserWithEncryptedPassword(
     IN p_index_no VARCHAR(20),
-    IN p_username VARCHAR(255),
-    IN p_fullname VARCHAR(255),
+    IN p_name VARCHAR(255),
     IN p_email VARCHAR(255),
     IN p_tel VARCHAR(255),
     IN p_password VARCHAR(255),
@@ -40,10 +40,10 @@ CREATE PROCEDURE InsertUserWithEncryptedPassword(
 )
 BEGIN
     DECLARE hashed_password VARCHAR(255);
-    SET hashed_password = CONCAT('mysaltprefix', SHA2(p_password, 256));
+    SET hashed_password = CONCAT('fotpwd', SHA2(p_password, 256));
 
-    INSERT INTO users (index_no, username, fullname, email, tel, password, role)
-    VALUES (p_index_no, p_username, p_fullname, p_email, p_tel, hashed_password, p_role);
+    INSERT INTO users (index_no, name email, mobile_no, password, role)
+    VALUES (p_index_no, p_name, p_email, p_tel, hashed_password, p_role);
 END;
 //
 
@@ -51,28 +51,28 @@ DELIMITER ;
 
 
 -- Insert 10 students with hashed passwords
-CALL InsertUserWithEncryptedPassword('TG001', 'student1', 'Student 1', 'student1@example.com', '1234567890', 'password1', 6);
-CALL InsertUserWithEncryptedPassword('TG002', 'student2', 'Student 2', 'student2@example.com', '1234567891', 'password2', 6);
-CALL InsertUserWithEncryptedPassword('TG003', 'student3', 'Student 3', 'student3@example.com', '1234567892', 'password3', 6);
-CALL InsertUserWithEncryptedPassword('TG004', 'student4', 'Student 4', 'student4@example.com', '1234567893', 'password4', 6);
-CALL InsertUserWithEncryptedPassword('TG005', 'student5', 'Student 5', 'student5@example.com', '1234567894', 'password5', 6);
-CALL InsertUserWithEncryptedPassword('TG006', 'student6', 'Student 6', 'student6@example.com', '1234567895', 'password6', 6);
-CALL InsertUserWithEncryptedPassword('TG007', 'student7', 'Student 7', 'student7@example.com', '1234567896', 'password7', 6);
-CALL InsertUserWithEncryptedPassword('TG008', 'student8', 'Student 8', 'student8@example.com', '1234567897', 'password8', 6);
-CALL InsertUserWithEncryptedPassword('TG009', 'student9', 'Student 9', 'student9@example.com', '1234567898', 'password9', 6);
-CALL InsertUserWithEncryptedPassword('TG010', 'student10', 'Student 10', 'student10@example.com', '1234567899', 'password10', 6);
+CALL InsertUserWithEncryptedPassword('TG001', 'student1', 'student1@example.com', '1234567890', 'password1', 6);
+CALL InsertUserWithEncryptedPassword('TG002', 'student2', 'student2@example.com', '1234567891', 'password2', 6);
+CALL InsertUserWithEncryptedPassword('TG003', 'student3', 'student3@example.com', '1234567892', 'password3', 6);
+CALL InsertUserWithEncryptedPassword('TG004', 'student4', 'student4@example.com', '1234567893', 'password4', 6);
+CALL InsertUserWithEncryptedPassword('TG005', 'student5', 'student5@example.com', '1234567894', 'password5', 6);
+CALL InsertUserWithEncryptedPassword('TG006', 'student6', 'student6@example.com', '1234567895', 'password6', 6);
+CALL InsertUserWithEncryptedPassword('TG007', 'student7', 'student7@example.com', '1234567896', 'password7', 6);
+CALL InsertUserWithEncryptedPassword('TG008', 'student8', 'student8@example.com', '1234567897', 'password8', 6);
+CALL InsertUserWithEncryptedPassword('TG009', 'student9', 'student9@example.com', '1234567898', 'password9', 6);
+CALL InsertUserWithEncryptedPassword('TG010', 'student10', 'student10@example.com', '1234567899', 'password10', 6);
 
 -- Insert 1 sub-warden with a hashed password
-CALL InsertUserWithEncryptedPassword('SW001', 'subwarden', 'Sub-Warden', 'subwarden@example.com', '1234567800', 'subwardenpass', 5);
+CALL InsertUserWithEncryptedPassword('SW001', 'subwarden', 'subwarden@example.com', '1234567800', '123456789', 5);
 
 -- Insert 1 warden with a hashed password
-CALL InsertUserWithEncryptedPassword('WO001', 'warden', 'Warden', 'warden@example.com', '1234567801', 'wardenpass', 4);
+CALL InsertUserWithEncryptedPassword('WO002', 'warden2', 'warden2@example.com', '1234567800', '123456789', 4);
 
 -- Insert 1 student counselor with a hashed password
-CALL InsertUserWithEncryptedPassword('SC001', 'counselor', 'Student Counselor', 'counselor@example.com', '1234567802', 'counselorpass', 3);
+CALL InsertUserWithEncryptedPassword('SC001', 'counselor', 'counselor@example.com', '1234567802', '123456789', 3);
 
 -- Insert 1 dean with a hashed password
-CALL InsertUserWithEncryptedPassword('DE001', 'dean', 'Dean', 'dean@example.com', '1234567803', 'deanpass', 2);
+CALL InsertUserWithEncryptedPassword('DE001', 'Dean', 'dean@example.com', '1234567803', '123456789', 2);
 
 
 
@@ -94,7 +94,7 @@ BEGIN
     
     SELECT id INTO user_id
     FROM users
-    WHERE (email = p_identifier OR tel = p_identifier OR index_no = p_identifier) AND password = CONCAT('mysaltprefix', SHA2(p_password, 256));
+    WHERE (email = p_identifier OR mobile_no = p_identifier OR index_no = p_identifier) AND password = CONCAT('fotpwd', SHA2(p_password, 256));
     
     
     IF user_id IS NOT NULL THEN
@@ -104,7 +104,7 @@ BEGIN
     END IF;
     
     
-    SELECT user_message AS message, id, index_no, username, fullname, email, tel, role
+    SELECT user_message AS message, id, index_no, name, email, mobile_no, role
     FROM users
     WHERE id = user_id;
 END //
@@ -320,14 +320,17 @@ VALUES
 
 === maintenance table ===
 
-CREATE TABLE maintenance (
+CREATE TABLE maintaince (
     maintenance_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    asset_id INT NOT NULL,
+    complaint_id INT NOT NULL,
+    res_id INT NOT NULL,
+    handler VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
-    type VARCHAR(255) NOT NULL,
+    inspection_note TEXT NOT NULL,
+    solution TEXT NOT NULL,
     evidence_image VARCHAR(255),
     date DATETIME NOT NULL,
-    FOREIGN KEY (asset_id) REFERENCES assets_categories(id)
+    FOREIGN KEY (res_id) REFERENCES resource(res_id)
 );
 
 
