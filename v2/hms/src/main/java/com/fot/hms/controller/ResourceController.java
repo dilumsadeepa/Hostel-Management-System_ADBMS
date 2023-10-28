@@ -4,9 +4,7 @@ import com.fot.hms.model.ResourceEntity;
 import com.fot.hms.service.ResourceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,4 +22,11 @@ public class ResourceController {
         List<ResourceEntity> resource = resourceService.findallAssets();
         return  new ResponseEntity<>(resource, HttpStatus.OK);
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<ResourceEntity> addAssets(@RequestBody ResourceEntity resourceEntity){
+        ResourceEntity newres = resourceService.addresource(resourceEntity);
+        return new ResponseEntity<>(newres,HttpStatus.CREATED);
+    }
+
 }

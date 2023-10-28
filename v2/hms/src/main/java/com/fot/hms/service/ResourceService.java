@@ -25,7 +25,7 @@ public class ResourceService {
         resourceRepo.deleteById(id);
     }
 
-    public ResourceEntity addasset(ResourceEntity resourceEntity){
+    public ResourceEntity addresource(ResourceEntity resourceEntity){
         return resourceRepo.save(resourceEntity);
     }
 }
