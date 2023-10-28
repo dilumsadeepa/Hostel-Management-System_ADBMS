@@ -29,4 +29,10 @@ public class ResourceController {
         return new ResponseEntity<>(newres,HttpStatus.CREATED);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<ResourceEntity> updateAssets(@RequestBody ResourceEntity assetsEntity){
+        ResourceEntity updateres = resourceService.addresource(assetsEntity);
+        return new ResponseEntity<>(updateres,HttpStatus.OK);
+    }
+
 }
