@@ -4,7 +4,7 @@ CREATE TABLE complaint(
     user_index VARCHAR(255) NOT NULL,
     complaint TEXT(2000) NOT NULL,
     res_id int NOT NULL,
-    complaint_date DATETIME COMMENT 'Create Time',
+    complaint_date DATE COMMENT 'Create Time',
     evidence_image VARCHAR(255) NULL,
     status VARCHAR(255) NULL,
     Foreign Key (user_id) REFERENCES users(id),
@@ -14,11 +14,43 @@ CREATE TABLE complaint(
 
 INSERT INTO complaint (user_id, user_index, complaint, res_id, complaint_date, evidence_image, status)
 VALUES
-    (1, 'TG006', 'Water leakage in the bathroom', 1, '2023-10-28 10:00:00', 'evidence1.jpg', 'Pending'),
-    (2, 'TG001', 'Broken cupboard in room 102', 2, '2023-10-28 11:30:00', 'evidence2.jpg', 'In Progress'),
-    (3, 'TG002', 'Broken fan in room 105', 3, '2023-10-28 12:45:00', 'evidence3.jpg', 'Resolved'),
-    (4, 'TG003', 'Broken table in room 105', 4, '2023-10-28 14:20:00', 'evidence4.jpg', 'Pending'),
-    (5, 'TG004', 'Broken chair in room 103', 5, '2023-10-28 15:10:00', 'evidence5.jpg', 'In Progress');
+    (1, 'TG006', 'Water leakage in the bathroom', 1, '2023-10-28', 'evidence1.jpg', 'Pending'),
+    (2, 'TG001', 'Broken cupboard in room 102', 2, '2023-10-28', 'evidence2.jpg', 'In Progress'),
+    (3, 'TG002', 'Broken fan in room 105', 3, '2023-10-28', 'evidence3.jpg', 'Resolved'),
+    (4, 'TG003', 'Broken table in room 105', 4, '2023-10-28', 'evidence4.jpg', 'Pending'),
+    (5, 'TG004', 'Broken chair in room 103', 5, '2023-10-28', 'evidence5.jpg', 'In Progress');
+
+
+-- retrieves all complaints for a particular user_index
+DELIMITER $$
+
+CREATE PROCEDURE GetComplaintsByUserIndex(IN in_user_index VARCHAR(255))
+BEGIN
+    SELECT * FROM complaint WHERE user_index = in_user_index;
+END $$
+
+DELIMITER ;
+
+CALL GetComplaintsByUserIndex('TG001');
+
+
+-- retrieves all complaints for a particular complaint_date,
+
+DELIMITER $$
+
+CREATE PROCEDURE GetComplaintsByDate(IN in_complaint_date DATETIME)
+BEGIN
+    SELECT * FROM complaint WHERE complaint_date = in_complaint_date;
+END $$
+
+DELIMITER ;
+
+CALL GetComplaintsByDate('2023-10-28')
+
+
+
+
+
 
 
 
