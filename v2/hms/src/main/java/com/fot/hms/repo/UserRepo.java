@@ -12,7 +12,7 @@ import java.util.Map;
 public interface UserRepo extends JpaRepository<UsersEntity, Integer> {
 
     @Query(value = "CALL InsertUserWithEncryptedPassword(:indexNo, :name, :email, :mobileNo, :password, :role)", nativeQuery = true)
-    int createUserWithEncryptedPassword(
+    String createUserWithEncryptedPassword(
             @Param("indexNo") String indexNo,
             @Param("name") String name,
             @Param("email") String email,
@@ -26,5 +26,18 @@ public interface UserRepo extends JpaRepository<UsersEntity, Integer> {
             @Param("identifier") String identifier,
             @Param("password") String password
     );
+
+    @Query(value = "CALL UpdateUser(:id, :indexNo, :name, :email, :mobileNo, :password, :role)", nativeQuery = true)
+    List<Map<String, Object>> updateUser(
+            @Param("id") int id,
+            @Param("indexNo") String indexNo,
+            @Param("name") String name,
+            @Param("email") String email,
+            @Param("mobileNo") String mobileNo,
+            @Param("password") String password,
+            @Param("role") int role
+    );
+
+
 
 }

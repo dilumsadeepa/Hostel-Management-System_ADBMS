@@ -3,6 +3,7 @@ package com.fot.hms.service;
 import com.fot.hms.model.UsersEntity;
 import com.fot.hms.repo.UserRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,8 +43,8 @@ public class UserService {
         userRepo.deleteById(id);
     }
 
-    public int createUserWithEncryptedPassword(String indexNo, String name, String email, String mobileNo, String password, int role) {
-        int res = userRepo.createUserWithEncryptedPassword(indexNo, name, email, mobileNo, password, role);
+    public String createUserWithEncryptedPassword(String indexNo, String name, String email, String mobileNo, String password, int role) {
+        String res = userRepo.createUserWithEncryptedPassword(indexNo, name, email, mobileNo, password, role);
         return res;
     }
 
@@ -58,6 +59,12 @@ public class UserService {
             response.put("message", "Authentication Failed");
         }
         return response;
+    }
+
+    @Transactional
+    public List<Map<String, Object>> updateUserWithProcedure(int id, String indexNo, String name, String email, String mobileNo, String password, int role) {
+
+        return userRepo.updateUser(id, indexNo, name, email, mobileNo, password, role);
     }
 
 }
