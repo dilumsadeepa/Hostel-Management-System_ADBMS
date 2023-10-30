@@ -34,6 +34,18 @@ public class ResourceController {
         return new ResponseEntity<>(updateres,HttpStatus.OK);
     }
 
+
+    @GetMapping("/find/{resId}")
+    public ResponseEntity<ResourceEntity> findResourceById(@PathVariable("resId") int resId) {
+        ResourceEntity resource = resourceService.findResourceById(resId);
+        if (resource != null) {
+            return new ResponseEntity<>(resource, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 //    @DeleteMapping("/delete/{resId}")
 //    public ResponseEntity<?> deleteAssets(@PathVariable("resId") int resId){
 //        resourceService.deleteresource(resId);
