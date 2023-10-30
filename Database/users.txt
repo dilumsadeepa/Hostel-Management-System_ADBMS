@@ -15,6 +15,18 @@ CREATE TABLE users (
   FOREIGN KEY (role) REFERENCES roles (id)
 );
 
+CREATE TABLE deletedusers (
+    id INT NOT NULL AUTO_INCREMENT,
+    index_no VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    mobile_no VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role INT NOT NULL,
+    deletedate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
 insert into roles (role_name) values
     ('admin'),
     ('dean'),
@@ -44,10 +56,62 @@ BEGIN
 
     INSERT INTO users (index_no, name email, mobile_no, password, role)
     VALUES (p_index_no, p_name, p_email, p_tel, hashed_password, p_role);
+    
+    SELECT id from users where index_no = p_index_no;
 END;
 //
 
 DELIMITER ;
+
+
+=== procedure to update users ====
+
+DELIMITER //
+
+CREATE PROCEDURE UpdateUser(
+    IN p_id INT,
+    IN p_index_no VARCHAR(20),
+    IN p_name VARCHAR(255),
+    IN p_email VARCHAR(255),
+    IN p_tel VARCHAR(255),
+    IN p_password VARCHAR(255),
+    IN p_role INT
+)
+BEGIN
+    DECLARE hashed_password VARCHAR(255);
+    SET hashed_password = CONCAT('fotpwd', SHA2(p_password, 256));
+
+    UPDATE users
+    SET index_no = p_index_no,
+        name = p_name,
+        email = p_email,
+        mobile_no = p_tel,
+        password = hashed_password,
+        role = p_role
+    WHERE id = p_id;
+    
+    SELECT * FROM users where id = p_id;
+END;
+//
+
+DELIMITER ;
+
+
+=== trigger to insert deleteuser ===
+
+DELIMITER //
+
+CREATE TRIGGER before_delete_user
+BEFORE DELETE ON users
+FOR EACH ROW
+BEGIN
+    INSERT INTO deletedusers (index_no, name, email, mobile_no, password, role, deletedate)
+    VALUES (OLD.index_no, OLD.name, OLD.email, OLD.mobile_no, OLD.password, OLD.role,NOW());
+END;
+//
+
+DELIMITER ;
+
 
 
 -- Insert 10 students with hashed passwords
@@ -338,12 +402,37 @@ ALTER TABLE maintaince
 ADD FOREIGN KEY (complaint_id) REFERENCES complaint (complaint_id);
 
 
-INSERT INTO maintenance (asset_id, status, type, evidence_image, date, complaint_id)
+=== viewcomplaint ===
+
+CREATE VIEW ViewMaintaince AS
+SELECT 
+    maintaince.maintenance_id,
+    maintaince.complaint_id AS maintaince_complaint_id,
+    maintaince.handler AS maintaince_handler,
+    maintaince.status AS maintaince_status,
+    maintaince.inspection_note AS maintaince_inspection_note,
+    maintaince.solution AS maintaince_solution,
+    maintaince.evidence_image AS maintaince_evidence_image,
+    maintaince.date AS maintaince_date,
+    complaint.complaint_id AS complaint_complaint_id,
+    complaint.user_id AS complaint_user_id,
+    complaint.res_id AS complaint_res_id,
+    users.id AS users_id,
+    users.name AS users_username,
+    users.email AS users_email,
+    resource.res_id AS resource_res_id,
+    resource.res_name AS resource_res_name
+FROM maintaince
+JOIN complaint ON maintaince.complaint_id = complaint.complaint_id
+JOIN users ON complaint.user_id = users.id
+JOIN resource ON complaint.res_id = resource.res_id;
+
+
+INSERT INTO maintaince (complaint_id, handler, status, inspection_note, solution, evidence_image, date)
 VALUES
-    (1, 'Pending', 'Repair', 'repair.jpg', NOW(), 1),
-    (2, 'In Progress', 'Maintenance', 'maintenance.jpg', NOW(), 2),
-    (3, 'Completed', 'Inspection', 'inspection.jpg', NOW(), 3);
-    
+(1, 'John Doe', 'In Progress', 'Inspected the issue, needs further attention.', 'Repaired the faulty component.', 'image001.jpg', '2023-10-28 09:00:00'),
+(3, 'Emily Smith', 'Completed', 'Inspection completed, issue resolved.', 'Replaced damaged part.', 'image002.jpg', '2023-10-27 11:30:00'),
+(4, 'Michael Johnson', 'Pending', 'Scheduled for inspection.', 'To be inspected.', NULL, '2023-10-29 14:15:00');
     
 
 === complaint_assignments ===

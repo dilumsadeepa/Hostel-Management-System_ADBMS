@@ -4,7 +4,6 @@ import com.fot.hms.model.UsersEntity;
 import com.fot.hms.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +49,7 @@ public class UserController {
 
     // Create a user with encrypted password
     @PostMapping("/createWithEncryptedPassword")
-    public int createUserWithEncryptedPassword(@RequestBody Map<String, Object> requestData) {
+    public String createUserWithEncryptedPassword(@RequestBody Map<String, Object> requestData) {
         String indexNo = (String) requestData.get("indexNo");
         String name = (String) requestData.get("name");
         String email = (String) requestData.get("email");
@@ -58,11 +57,14 @@ public class UserController {
         String password = (String) requestData.get("password");
         int role = (int) requestData.get("role");
 
-        int res = userService.createUserWithEncryptedPassword(indexNo, name, email, mobileNo, password, role);
+        String res = userService.createUserWithEncryptedPassword(indexNo, name, email, mobileNo, password, role);
 
+        if (!res.isEmpty()){
+            return "success";
+        }else{
+            return res;
+        }
 
-
-        return res;
     }
 
     @PostMapping("/authenticate")
@@ -71,6 +73,19 @@ public class UserController {
         String password = requestData.get("password");
 
         return userService.authenticateUser(identifier, password);
+    }
+
+    @PutMapping("/updateuser")
+    public List<Map<String, Object>> updateUserWithProcedure(@RequestBody Map<String, Object> requestData) {
+        int id = (int) requestData.get("id");
+        String indexNo = (String) requestData.get("indexNo");
+        String name = (String) requestData.get("name");
+        String email = (String) requestData.get("email");
+        String mobileNo = (String) requestData.get("mobileNo");
+        String password = (String) requestData.get("password");
+        int role = (int) requestData.get("role");
+
+        return userService.updateUserWithProcedure(id, indexNo, name, email, mobileNo, password, role);
     }
 
 }
