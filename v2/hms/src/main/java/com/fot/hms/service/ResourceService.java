@@ -27,4 +27,9 @@ public class ResourceService {
     public ResourceEntity addresource(ResourceEntity resourceEntity){
         return resourceRepo.save(resourceEntity);
     }
+
+    public ResourceEntity findResourceById(int resId) {
+        return resourceRepo.findByResId(resId);
+    }
+
 }
