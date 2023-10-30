@@ -2,6 +2,7 @@ import React from "react";
 import AdminNavbar from "./AdminNavbar";
 import AdminTopBar from "./AdminTopBar";
 import AdminFooter from "./AdminFooter";
+import DashboardTables from "./DashboardTables";
 
 const AdminEmptyContent = () => {
   return (
@@ -25,7 +26,9 @@ const AdminEmptyContent = () => {
               </div>
 
 
-              <h2>You Resources Content Goes Here</h2>
+              <h2>Your Resources Content Goes Here</h2>
+
+                <DashboardTables />
 
               <AdminFooter />
             </div>

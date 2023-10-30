@@ -5,8 +5,8 @@ const AdminNavbar = () => {
     <nav className="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
       <div className="container-fluid d-flex flex-column p-0">
         <a className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-          <div className="sidebar-brand-icon rotate-n-15"><i className="fas fa-laugh-wink"></i></div>
-          <div className="sidebar-brand-text mx-3"><span>Brand</span></div>
+          <div className="sidebar-brand-icon rotate-n-15"><i class="fas fa-school"></i></div>
+          <div className="sidebar-brand-text mx-3"><span>HMS</span></div>
         </a>
         <hr className="sidebar-divider my-0" />
         <ul className="navbar-nav text-light" id="accordionSidebar">

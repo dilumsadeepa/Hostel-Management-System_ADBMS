@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminHome from "./components/Admin/AdminHome";
 import AdminEmptyContent from "./components/Admin/AdminEmptyContent";
+import PageNotFound from "./components/Common/PageNotFound";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AdminHome/>} />
           <Route path="/adminempty" element={<AdminEmptyContent/>} />
-          <Route path="*" element={<h1>Not Found</h1>} />
+          <Route path="*" element={<PageNotFound/>} />
         </Routes>
       </BrowserRouter>
     </div>
