@@ -9,31 +9,28 @@ import java.sql.Timestamp;
 public class MaintainceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "maintenance_id", nullable = false)
+    @Column(name = "maintenance_id")
     private int maintenanceId;
     @Basic
-    @Column(name = "complaint_id", nullable = false)
+    @Column(name = "complaint_id")
     private int complaintId;
     @Basic
-    @Column(name = "res_id", nullable = false)
-    private int resId;
-    @Basic
-    @Column(name = "handler", nullable = false, length = 255)
+    @Column(name = "handler")
     private String handler;
     @Basic
-    @Column(name = "status", nullable = false, length = 255)
+    @Column(name = "status")
     private String status;
     @Basic
-    @Column(name = "inspection_note", nullable = false, length = -1)
+    @Column(name = "inspection_note")
     private String inspectionNote;
     @Basic
-    @Column(name = "solution", nullable = false, length = -1)
+    @Column(name = "solution")
     private String solution;
     @Basic
-    @Column(name = "evidence_image", nullable = true, length = 255)
+    @Column(name = "evidence_image")
     private String evidenceImage;
     @Basic
-    @Column(name = "date", nullable = false)
+    @Column(name = "date")
     private Timestamp date;
 
     public int getMaintenanceId() {
@@ -50,14 +47,6 @@ public class MaintainceEntity {
 
     public void setComplaintId(int complaintId) {
         this.complaintId = complaintId;
-    }
-
-    public int getResId() {
-        return resId;
-    }
-
-    public void setResId(int resId) {
-        this.resId = resId;
     }
 
     public String getHandler() {
@@ -117,7 +106,6 @@ public class MaintainceEntity {
 
         if (maintenanceId != that.maintenanceId) return false;
         if (complaintId != that.complaintId) return false;
-        if (resId != that.resId) return false;
         if (handler != null ? !handler.equals(that.handler) : that.handler != null) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
         if (inspectionNote != null ? !inspectionNote.equals(that.inspectionNote) : that.inspectionNote != null)
@@ -134,7 +122,6 @@ public class MaintainceEntity {
     public int hashCode() {
         int result = maintenanceId;
         result = 31 * result + complaintId;
-        result = 31 * result + resId;
         result = 31 * result + (handler != null ? handler.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (inspectionNote != null ? inspectionNote.hashCode() : 0);
