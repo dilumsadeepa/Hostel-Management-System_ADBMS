@@ -14,7 +14,6 @@
     "formik": "^2.4.5",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.1",
-    "html5-qrcode": "^2.3.8",
     "jquery": "^3.7.1",
     "jspdf": "^2.5.1",
     "pdfmake": "^0.2.7",
