@@ -36,6 +36,12 @@ const AdminNavbar = () => {
           </li>
           <li className="nav-item">
             <a className="nav-link" href="register.html">
+              <i className="fas fa-home"></i>
+              <span>Assets</span>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="register.html">
               <i className="fas fa-user-circle"></i>
               <span>Register</span>
             </a>
