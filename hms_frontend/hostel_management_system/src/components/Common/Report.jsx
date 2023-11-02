@@ -1,4 +1,5 @@
 import React from "react";
+import './reportstyle.css';
 
 export default function Report() {
   return (

@@ -29,6 +29,12 @@ const AdminNavbar = () => {
             </a>
           </li>
           <li className="nav-item">
+            <a className="nav-link" href="/reports">
+              <i className="fas fa-table"></i>
+              <span>Reports</span>
+            </a>
+          </li>
+          <li className="nav-item">
             <a className="nav-link" href="/login">
               <i className="far fa-user-circle"></i>
               <span>Login</span>
