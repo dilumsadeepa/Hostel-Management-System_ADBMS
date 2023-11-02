@@ -30,14 +30,16 @@ const CreateNewComplaint = () => {
         });
     };
 
-
-      // Validation rules defined here:
-  const validationSchema = Yup.object().shape({
-    cunit: Yup.string().required('You must provide a course code'),
-    cdate: Yup.string().required('You must provide a course date'),
-    ctime: Yup.string().required('You must provide a course time'),
-    hall: Yup.string().required('You must provide a hall number'),
-  });
+    //validatins form
+    const validationSchema = Yup.object().shape({
+        userId: Yup.string().required('User ID is required'),
+        userIndex: Yup.string().required('User Index is required'),
+        complaint: Yup.string().required('Complaint is required'),
+        resId: Yup.number().required('Resource ID is required'),
+        complaintDate: Yup.date().required('Complaint Date is required'),
+        evidenceImage: Yup.string().required('Evidence Image is required'),
+        status: Yup.string().required('Status is required'),
+      });
 
     return (
         <div>
@@ -50,14 +52,14 @@ const CreateNewComplaint = () => {
              <div class="mb-3">
              <label className="my-2">user Id:</label>
                 <ErrorMessage name='userId' className="badge rounded-pill text-bg-danger my-3" component='span'  />
-                <Field id="inputCreatePost" className={`form-control`} name='userId' placeholder='User Id' autocomplete="off" />
+                <Field id="inputCreatePost" className={`form-control`} name='userId' placeholder='User Id' autoComplete="off" />
              </div>
 
 
                 <div class="mb-3">
                 <label className="my-2">user Index:</label>
-                <ErrorMessage name='userId' className="badge rounded-pill text-bg-danger my-3" component='span'  />
-                <Field id="inputCreatePost" className={`form-control`} name='userId' placeholder='User Id' autocomplete="off" />
+                <ErrorMessage name='userIndex' className="badge rounded-pill text-bg-danger my-3" component='span'  />
+                <Field id="inputCreatePost" className={`form-control`} name='userIndex' placeholder='Index No' autoComplete="off" />
                 </div>
                 
 
@@ -71,13 +73,13 @@ const CreateNewComplaint = () => {
              <div class="mb-3">
                 <label className="my-2">Resource Id:</label>
                 <ErrorMessage name='resId' className="badge rounded-pill text-bg-danger my-3" component='span'  />
-                <Field id="resId" name="resId" placeholder="Your complaint"/>
+                <Field id="resId" name="resId" className={`form-control`} placeholder="Your complaint"/>
             </div>
 
             <div class="mb-3">   
                 <label className="my-2">Complaint Date:</label>
                 <ErrorMessage name='complaintDate' className="badge rounded-pill text-bg-danger my-3" component='span'  />
-                <Field as="date" id="complaintDate" name="complaintDate" className={`form-control`}  placeholder="Your complaint"/>
+                <Field type="date" id="complaintDate" name="complaintDate" className={`form-control`}  placeholder="Your complaint"/>
              </div>
 
              <div class="mb-3">  
