@@ -192,7 +192,7 @@ const handleShowModal = (complaintId) => {
                 <a
                   className="btn btn-primary btn-sm d-none d-sm-inline-block"
                   role="button"
-                  href="#"
+                  href="/complaint/create"
                 >
                   <i className="fas fa-download fa-sm text-white-50"></i>
                   &nbsp;New Complaint
