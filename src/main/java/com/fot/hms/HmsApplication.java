@@ -18,6 +18,8 @@ public class HmsApplication {
 		SpringApplication.run(HmsApplication.class, args);
 	}
 
+
+
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
