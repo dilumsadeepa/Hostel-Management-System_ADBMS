@@ -53,7 +53,7 @@ public class UserService {
 
         Map<String, Object> response = new HashMap<>();
         if (!result.isEmpty()) {
-            response.put("message", "Authentication Successful");
+            response.put("message", "Authentication is Successful");
             response.putAll(result.get(0)); // Assuming it returns a single row with user details
         } else {
             response.put("message", "Authentication Failed");
