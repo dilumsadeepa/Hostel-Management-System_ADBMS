@@ -61,6 +61,12 @@ public class ComplaintController {
     }
 
 
+    @PutMapping("/markAsDeleted/{Id}")
+    public ResponseEntity<?> markComplaintAsDeleted(@PathVariable("Id") int Id) {
+        complaintService.markAsDeleted(Id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 
 }
