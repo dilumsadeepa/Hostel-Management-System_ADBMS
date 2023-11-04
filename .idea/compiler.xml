@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hms (1) (com.adms)" />
-        <module name="hms (2) (com.fot)" />
+        <module name="hms" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="hms" target="17" />
+      <module name="hms (1) (com.adms)" target="17" />
+      <module name="hms (2) (com.fot)" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

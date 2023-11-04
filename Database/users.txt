@@ -54,10 +54,10 @@ BEGIN
     DECLARE hashed_password VARCHAR(255);
     SET hashed_password = CONCAT('fotpwd', SHA2(p_password, 256));
 
-    INSERT INTO users (index_no, name email, mobile_no, password, role)
+    INSERT INTO users (index_no, name, email, mobile_no, password, role)
     VALUES (p_index_no, p_name, p_email, p_tel, hashed_password, p_role);
     
-    SELECT id from users where index_no = p_index_no;
+    SELECT COUNT(*) from users;
 END;
 //
 
@@ -125,6 +125,7 @@ CALL InsertUserWithEncryptedPassword('TG007', 'student7', 'student7@example.com'
 CALL InsertUserWithEncryptedPassword('TG008', 'student8', 'student8@example.com', '1234567897', 'password8', 6);
 CALL InsertUserWithEncryptedPassword('TG009', 'student9', 'student9@example.com', '1234567898', 'password9', 6);
 CALL InsertUserWithEncryptedPassword('TG010', 'student10', 'student10@example.com', '1234567899', 'password10', 6);
+CALL InsertUserWithEncryptedPassword('TG0013', 'student13', 'student13@example.com', '1234567813', '123456789', 6);
 
 -- Insert 1 sub-warden with a hashed password
 CALL InsertUserWithEncryptedPassword('SW001', 'subwarden', 'subwarden@example.com', '1234567800', '123456789', 5);
