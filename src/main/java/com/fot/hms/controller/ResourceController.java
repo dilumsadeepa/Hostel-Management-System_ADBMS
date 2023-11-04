@@ -46,6 +46,16 @@ public class ResourceController {
     }
 
 
+    @DeleteMapping("/delete/{resourceId}")
+    public ResponseEntity<String> deleteResourceEntity(@PathVariable int resourceId) {
+        resourceService.deleteResourceEntityById(resourceId);
+        return ResponseEntity.ok("ResourceEntity with ID " + resourceId + " deleted successfully.");
+    }
+
+
+
+
+
 //    @DeleteMapping("/delete/{resId}")
 //    public ResponseEntity<?> deleteAssets(@PathVariable("resId") int resId){
 //        resourceService.deleteresource(resId);

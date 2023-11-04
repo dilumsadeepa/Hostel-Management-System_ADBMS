@@ -20,9 +20,6 @@ public class ResourceService {
         return resourceRepo.findAll();
     }
 
-    public void deleteresource(int resId){
-        resourceRepo.deleteById(resId);
-    }
 
     public ResourceEntity addresource(ResourceEntity resourceEntity){
         return resourceRepo.save(resourceEntity);
@@ -30,6 +27,11 @@ public class ResourceService {
 
     public ResourceEntity findResourceById(int resId) {
         return resourceRepo.findByResId(resId);
+    }
+
+
+    public void deleteResourceEntityById(int resourceId) {
+        resourceRepo.deleteById(resourceId);
     }
 
 }
