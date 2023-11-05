@@ -101,3 +101,72 @@ CREATE TABLE db_notifications (
 );
 
 ALTER TABLE `complaintNotification` RENAME `complaint_notification`; 
+
+
+-- Create a trigger to update the summary table
+DELIMITER //
+CREATE TRIGGER update_summary
+AFTER INSERT ON resource
+FOR EACH ROW
+BEGIN
+    IF NEW.res_name = 'chair' THEN
+        UPDATE summary_table SET item_count = item_count + 1 WHERE item_name = 'chair';
+    ELSEIF NEW.res_name = 'desk' THEN
+        UPDATE summary_table SET item_count = item_count + 1 WHERE item_name = 'desk';
+    ELSEIF NEW.res_name = 'lamp' THEN
+        UPDATE summary_table SET item_count = item_count + 1 WHERE item_name = 'lamp';
+    ELSEIF NEW.res_name = 'fan' THEN
+        UPDATE summary_table SET item_count = item_count + 1 WHERE item_name = 'fan';
+    ELSEIF NEW.res_name = 'bed' THEN
+        UPDATE summary_table SET item_count = item_count + 1 WHERE item_name = 'bed';
+    ELSEIF NEW.res_name = 'cloth rack' THEN
+        UPDATE summary_table SET item_count = item_count + 1 WHERE item_name = 'cloth rack';
+    ELSEIF NEW.res_name = 'cupboard' THEN
+        UPDATE summary_table SET item_count = item_count + 1 WHERE item_name = 'cupboard';
+    END IF;
+END;
+//
+DELIMITER ;
+
+
+--- After Delete Trigger ---
+
+DELIMITER $$
+CREATE TRIGGER after_delete_trigger
+AFTER DELETE ON resource
+FOR EACH ROW
+BEGIN
+  INSERT INTO deleted_resource (res_id, room_no, res_name, installation_date, last_maintenance_date, status, deletion_date)
+  VALUES (OLD.res_id, OLD.room_no, OLD.res_name, OLD.installation_date, OLD.last_maintenance_date, OLD.status, NOW());
+END;
+$$
+DELIMITER ;
+
+
+
+
+---- keep logs with triggers
+
+1)firstly created table for keep logs
+
+CREATE TABLE user_report_logs_final (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    action VARCHAR(255) NOT NULL,
+    timestamp TIMESTAMP NOT NULL,
+    user_id INT
+);
+
+
+2)then made a trigger
+
+DELIMITER //
+CREATE TRIGGER user_report_logs_final
+AFTER INSERT
+ON users  
+FOR EACH ROW
+BEGIN
+    INSERT INTO user_report_logs_final (action, timestamp, id)
+    VALUES ('new user added', NOW(), NEW.id); 
+END;
+//
+DELIMITER ;
