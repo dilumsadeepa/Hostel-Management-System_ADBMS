@@ -22,4 +22,6 @@ public interface ComplaintRepo extends JpaRepository<ComplaintEntity, Integer>{
     List<ComplaintEntity> getComplaintsByUserIndex(@Param("in_user_index") String userIndex);
 
 
+
+
 }
