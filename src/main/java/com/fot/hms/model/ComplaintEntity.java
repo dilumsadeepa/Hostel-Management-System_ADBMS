@@ -38,6 +38,17 @@ public class ComplaintEntity implements Serializable {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "is_deleted" , columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean IsDeleted;
+
+    public boolean isDeleted() {
+        return this.IsDeleted;
+    }
+
+    public void setIsDeleted(final boolean isDeleted) {
+        this.IsDeleted = isDeleted;
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private UsersEntity user;
@@ -55,7 +66,7 @@ public class ComplaintEntity implements Serializable {
 
     }
 
-    public ComplaintEntity(int userId, String userIndex, String complaint, int resId, LocalDate complaintDate, String evidenceImage, String status, UsersEntity user, UsersEntity userByIndex, ResourceEntity resource) {
+    public ComplaintEntity(int userId, String userIndex, String complaint, int resId, LocalDate complaintDate, String evidenceImage, String status, Boolean IsDeleted, UsersEntity user, UsersEntity userByIndex, ResourceEntity resource) {
         this.userId = userId;
         this.userIndex = userIndex;
         this.complaint = complaint;
@@ -63,6 +74,7 @@ public class ComplaintEntity implements Serializable {
         this.complaintDate = complaintDate;
         this.evidenceImage = evidenceImage;
         this.status = status;
+        this.IsDeleted = IsDeleted;
         this.user = user;
         this.userByIndex = userByIndex;
         this.resource = resource;
@@ -167,6 +179,7 @@ public class ComplaintEntity implements Serializable {
                 ", complaintDate=" + complaintDate +
                 ", evidenceImage='" + evidenceImage + '\'' +
                 ", status='" + status + '\'' +
+                ", IsDeleted=" + IsDeleted  + '\'' +
                 ", user=" + user +
                 ", userByIndex=" + userByIndex +
                 ", resource=" + resource +

@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/complaint")
@@ -19,8 +21,11 @@ public class ComplaintController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ComplaintEntity>> getAllComplaints () {
-        List<ComplaintEntity> complaints = complaintService.findAllComplaints();
+    public ResponseEntity<List<ComplaintEntity>> getAllComplaints() {
+        List<ComplaintEntity> complaints = complaintService.findAllComplaints()
+                .stream()
+                .filter(complaint -> !complaint.isDeleted()) // Filter out deleted complaints
+                .collect(Collectors.toList());
         return new ResponseEntity<>(complaints, HttpStatus.OK);
     }
 
@@ -60,6 +65,12 @@ public class ComplaintController {
         }
     }
 
+
+    @PutMapping("/markAsDeleted/{Id}")
+    public ResponseEntity<?> markComplaintAsDeleted(@PathVariable("Id") int Id) {
+        complaintService.markAsDeleted(Id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 
