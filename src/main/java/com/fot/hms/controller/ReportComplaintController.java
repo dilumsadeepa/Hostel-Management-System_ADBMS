@@ -19,7 +19,7 @@ public class ReportComplaintController {
         this.reportComplaintService = reportComplaintService;
     }
 
-    @GetMapping("/generateReportmp")
+    @PostMapping("/generateReportmp")
     public List<ReportComplaintEntity> generateComplaintReport(@RequestBody Map<String, Object> requestData) {
         String startComplaintDate = (String) requestData.get("startComplaintDate");
         String endComplaintDate = (String) requestData.get("endComplaintDate");
