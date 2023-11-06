@@ -54,4 +54,25 @@ public class ComplaintService {
     }
 
 
+
+    public long getTotalComplaintsCount() {
+        return complaintRepo.count();
+    }
+
+    public long getPendingComplaintsCount() {
+        return complaintRepo.countByStatus("pending");
+    }
+
+    public long getResolvedComplaintsCount() {
+        return complaintRepo.countByStatus("resolved");
+    }
+
+    public long getInProgressComplaintsCount() {
+        return complaintRepo.countByStatus("in-progress");
+    }
+
+    public List<ComplaintEntity> getComplaintsByUserId(int userId) {
+        return complaintRepo.findByUserId(userId);
+    }
+
 }
