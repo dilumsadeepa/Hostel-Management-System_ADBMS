@@ -45,6 +45,13 @@ public class ResourceController {
         }
     }
 
+    @GetMapping("/resources")
+    public List<ResourceEntity> getResourcesInRoom(@RequestParam int roomNumber) {
+        return resourceService.getResourcesInRoom(roomNumber);
+    }
+
+
+
 
 //    @DeleteMapping("/delete/{resId}")
 //    public ResponseEntity<?> deleteAssets(@PathVariable("resId") int resId){
