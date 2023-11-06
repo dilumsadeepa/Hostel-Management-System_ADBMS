@@ -41,7 +41,7 @@ public class ComplaintEntity implements Serializable {
     @Column(name = "is_deleted" , columnDefinition = "BOOLEAN DEFAULT false")
     private boolean IsDeleted;
 
-    public boolean isDeleted() {
+    public boolean setIsDeleted() {
         return this.IsDeleted;
     }
 
