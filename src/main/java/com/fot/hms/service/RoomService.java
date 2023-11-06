@@ -20,16 +20,31 @@ public class RoomService {
         return roomRepo.findAll();
     }
 
-    public Optional<RoomEntity> findRoomById(int roomNo) {
-        return roomRepo.findById(roomNo);
+    public RoomEntity findByRoomNo(int roomNo) {
+        return roomRepo.findByRoomNo(roomNo);
     }
 
-    public RoomEntity saveRoom(RoomEntity roomEntity) {
-        return roomRepo.save(roomEntity);
+    public RoomEntity saveRoom(RoomEntity room) {
+        return roomRepo.save(room);
+    }
+
+    public RoomEntity updateRoom(int roomNo, RoomEntity updatedRoom) {
+        RoomEntity existingRoom = roomRepo.findByRoomNo(roomNo);
+        if (existingRoom != null) {
+            existingRoom.setHostelNo(updatedRoom.getHostelNo());
+            existingRoom.setFloorNo(updatedRoom.getFloorNo());
+
+            return roomRepo.save(existingRoom);
+        } else {
+            return null; // You may handle this case as needed (e.g., return an error response)
+        }
     }
 
     public void deleteRoom(int roomNo) {
-        roomRepo.deleteById(roomNo);
+        RoomEntity room = findByRoomNo(roomNo);
+        if (room != null) {
+            roomRepo.delete(room);
+        }
     }
 
 

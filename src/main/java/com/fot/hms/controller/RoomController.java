@@ -26,39 +26,36 @@ public class RoomController {
         List<RoomEntity> rooms = roomService.findAllRooms();
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
-
     @GetMapping("/{roomNo}")
-    public ResponseEntity<RoomEntity> getRoomById(@PathVariable int roomNo) {
-        Optional<RoomEntity> room = roomService.findRoomById(roomNo);
-        return room.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<RoomEntity> getRoomByRoomNo(@PathVariable int roomNo) {
+        RoomEntity room = roomService.findByRoomNo(roomNo);
+        if (room != null) {
+            return ResponseEntity.ok(room);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/createRoom")
-    public ResponseEntity<RoomEntity> addRoom(@RequestBody RoomEntity roomEntity) {
-        RoomEntity newRoom = roomService.saveRoom(roomEntity);
-        return new ResponseEntity<>(newRoom, HttpStatus.CREATED);
+    public ResponseEntity<RoomEntity> createRoom(@RequestBody RoomEntity room) {
+        RoomEntity savedRoom = roomService.saveRoom(room);
+        return new ResponseEntity<>(savedRoom, HttpStatus.CREATED);
     }
 
     @PutMapping("/editRoom/{roomNo}")
-    public ResponseEntity<RoomEntity> updateRoom(@PathVariable int roomNo, @RequestBody RoomEntity roomEntity) {
-        if (roomService.findRoomById(roomNo).isPresent()) {
-            roomEntity.setRoomNo(roomNo);
-            RoomEntity updatedRoom = roomService.saveRoom(roomEntity);
-            return new ResponseEntity<>(updatedRoom, HttpStatus.OK);
+    public ResponseEntity<RoomEntity> updateRoom(@PathVariable int roomNo, @RequestBody RoomEntity updatedRoom) {
+        RoomEntity updatedEntity = roomService.updateRoom(roomNo, updatedRoom);
+        if (updatedEntity != null) {
+            return ResponseEntity.ok(updatedEntity);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/{roomNo}")
-    public ResponseEntity<?> deleteRoom(@PathVariable int roomNo) {
-        if (roomService.findRoomById(roomNo).isPresent()) {
-            roomService.deleteRoom(roomNo);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Void> deleteRoom(@PathVariable int roomNo) {
+        roomService.deleteRoom(roomNo);
+        return ResponseEntity.noContent().build();
     }
 
 }
