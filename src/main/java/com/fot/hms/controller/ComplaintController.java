@@ -74,4 +74,40 @@ public class ComplaintController {
 
 
 
+
+
+
+
+    @GetMapping("/total-count")
+    public ResponseEntity<Long> getTotalComplaintsCount() {
+        long count = complaintService.getTotalComplaintsCount();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/pending-count")
+    public ResponseEntity<Long> getPendingComplaintsCount() {
+        long count = complaintService.getPendingComplaintsCount();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/resolved-count")
+    public ResponseEntity<Long> getResolvedComplaintsCount() {
+        long count = complaintService.getResolvedComplaintsCount();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/in-progress-count")
+    public ResponseEntity<Long> getInProgressComplaintsCount() {
+        long count = complaintService.getInProgressComplaintsCount();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<ComplaintEntity>> getComplaintsByUserId(@PathVariable int userId) {
+        List<ComplaintEntity> complaints = complaintService.getComplaintsByUserId(userId);
+        return ResponseEntity.ok(complaints);
+    }
+
+
+
 }
