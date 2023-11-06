@@ -20,7 +20,7 @@ public class ReportStatusController {
     private ReportStatusService complaintDataService;
 
     @GetMapping("report-status")
-    public List<ReportStatusEntity> getComplaintDataBetweenDates(
+    public List<ReportStatusEntity> GetComplaintMaintenance(
             @RequestParam(name = "startDate") Date startDate,
             @RequestParam(name = "endDate") Date endDate) {
         return complaintDataService.GetComplaintMaintenance(startDate, endDate);
