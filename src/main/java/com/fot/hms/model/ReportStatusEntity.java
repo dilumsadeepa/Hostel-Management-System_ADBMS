@@ -1,15 +1,17 @@
 package com.fot.hms.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "complaint")
+//@Table(name = "complaint")
 
 public class ReportStatusEntity {
     @Id
+    @Column(name = "complaint_id")
     private Long complaintId;
     private String complaint;
     private String status;

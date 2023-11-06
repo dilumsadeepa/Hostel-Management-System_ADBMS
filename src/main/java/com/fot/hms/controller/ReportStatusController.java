@@ -21,7 +21,7 @@ public ReportStatusController(ReportStatusService complaintDataService){
     }
 
 
-    @PostMapping("report-status")
+    @PostMapping("/report-status")
     public List<ReportStatusEntity> GetComplaintMaintenance(@RequestBody Map<String, Object> requestData){
         String startDate = (String) requestData.get("startDate");
         String endDate = (String) requestData.get("endDate");
