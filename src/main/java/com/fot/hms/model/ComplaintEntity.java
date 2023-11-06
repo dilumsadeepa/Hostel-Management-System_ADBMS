@@ -179,6 +179,7 @@ public class ComplaintEntity implements Serializable {
                 ", complaintDate=" + complaintDate +
                 ", evidenceImage='" + evidenceImage + '\'' +
                 ", status='" + status + '\'' +
+                ", IsDeleted=" + IsDeleted  + '\'' +
                 ", user=" + user +
                 ", userByIndex=" + userByIndex +
                 ", resource=" + resource +

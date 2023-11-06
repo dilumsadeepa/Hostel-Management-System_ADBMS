@@ -1,16 +1,20 @@
 package com.fot.hms.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "room", schema = "hms", catalog = "")
 public class RoomEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @jakarta.persistence.Column(name = "room_no", nullable = false)
     private int roomNo;
+
+    @jakarta.persistence.Column(name = "hostel_no", nullable = false)
+    private int hostelNo;
+
+    @jakarta.persistence.Column(name = "floor_no", nullable = false)
+    private int floorNo;
 
     public int getRoomNo() {
         return roomNo;
@@ -20,11 +24,6 @@ public class RoomEntity {
         this.roomNo = roomNo;
     }
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @jakarta.persistence.Column(name = "hostel_no", nullable = false)
-    private int hostelNo;
-
     public int getHostelNo() {
         return hostelNo;
     }
@@ -32,11 +31,6 @@ public class RoomEntity {
     public void setHostelNo(int hostelNo) {
         this.hostelNo = hostelNo;
     }
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @jakarta.persistence.Column(name = "floor_no", nullable = false)
-    private int floorNo;
 
     public int getFloorNo() {
         return floorNo;

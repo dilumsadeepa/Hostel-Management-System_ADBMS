@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="hms@newhms.cg5qaw4gi36b.us-east-1.rds.amazonaws.com" uuid="f7ba754e-024e-4b64-b62a-7f5a8c8dc08f">
+    <data-source source="LOCAL" name="hms@newhms.cg5qaw4gi36b.us-east-1.rds.amazonaws.com" uuid="adbebc32-b9d7-4a33-8d4d-56c27987307b">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://newhms.cg5qaw4gi36b.us-east-1.rds.amazonaws.com:3306/hms</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="@localhost" uuid="de68f832-0ab6-4816-9767-74899812ffe6">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
