@@ -24,7 +24,7 @@ public class ComplaintController {
     public ResponseEntity<List<ComplaintEntity>> getAllComplaints() {
         List<ComplaintEntity> complaints = complaintService.findAllComplaints()
                 .stream()
-                .filter(complaint -> !complaint.isDeleted()) // Filter out deleted complaints
+                .filter(complaint -> !complaint.setIsDeleted()) // Filter out deleted complaints
                 .collect(Collectors.toList());
         return new ResponseEntity<>(complaints, HttpStatus.OK);
     }
