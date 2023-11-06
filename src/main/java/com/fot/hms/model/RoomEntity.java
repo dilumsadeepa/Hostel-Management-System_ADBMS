@@ -12,6 +12,7 @@ public class RoomEntity {
     @Column(name = "room_id")
     private int roomId;
 
+
     @Basic
     @Column(name = "room_no", nullable = false)
     private int roomNo;
