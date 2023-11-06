@@ -5,16 +5,27 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "room", schema = "hms", catalog = "")
 public class RoomEntity {
+
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @jakarta.persistence.Column(name = "room_no", nullable = false)
+    @Column(name = "room_id")
+    private int roomId;
+
+    @Basic
+    @Column(name = "room_no", nullable = false)
     private int roomNo;
 
-    @jakarta.persistence.Column(name = "hostel_no", nullable = false)
+    @Basic
+    @Column(name = "hostel_no", nullable = false)
     private int hostelNo;
 
-    @jakarta.persistence.Column(name = "floor_no", nullable = false)
+    @Basic
+    @Column(name = "floor_no", nullable = false)
     private int floorNo;
+
+
+
 
     public int getRoomNo() {
         return roomNo;
@@ -60,5 +71,13 @@ public class RoomEntity {
         result = 31 * result + hostelNo;
         result = 31 * result + floorNo;
         return result;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 }
