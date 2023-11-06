@@ -2,7 +2,7 @@ ssh -i "hostelm.pem" ubuntu@ec2-3-229-142-3.compute-1.amazonaws.com
 
 mysql -h newhms.cg5qaw4gi36b.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
 
-
+mysqldump -P 3306 -h newhms.cg5qaw4gi36b.us-east-1.rds.amazonaws.com -u admin -p hms > hostelms_group10.sql
 
 http://3.229.142.3:8080/users/all
 
