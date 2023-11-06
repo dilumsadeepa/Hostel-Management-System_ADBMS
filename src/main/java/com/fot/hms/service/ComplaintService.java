@@ -45,6 +45,8 @@ public class ComplaintService {
         return complaintRepo.getComplaintsByUserIndex(userIndex);
     }
 
+
+
     public void markAsDeleted(int complaintId) {
         ComplaintEntity complaint = findComplaintById(complaintId);
         complaint.setIsDeleted(true); // Set the IsDeleted field to true
