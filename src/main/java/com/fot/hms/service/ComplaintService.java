@@ -64,7 +64,7 @@ public class ComplaintService {
     }
 
     public long getResolvedComplaintsCount() {
-        return complaintRepo.countByStatus("resolved");
+        return complaintRepo.countByStatus("resolve");
     }
 
     public long getInProgressComplaintsCount() {
